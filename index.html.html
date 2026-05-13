@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistema Eléctrico Argentino — Guion didáctico</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;600;700&family=Google+Sans+Flex:wght@100..900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:       #f7f6f3;
+  --bg2:      #ffffff;
+  --bg3:      #f0ede8;
+  --bg4:      #e8e4dd;
+  --border:   #ddd9d2;
+  --border2:  #c8c3bb;
+  --text:     #1a1815;
+  --text2:    #4a4740;
+  --text3:    #8a857c;
+  --accent:   #1a5fa8;
+  --accent2:  #134b87;
+  --amber:    #b06010;
+  --amber-bg: #fdf3e7;
+  --amber-bd: #e8c080;
+  --teal:     #0a6e50;
+  --teal-bg:  #e8f5ef;
+  --teal-bd:  #80c8a8;
+  --red:      #a02020;
+  --red-bg:   #fdf0f0;
+  --red-bd:   #e0a0a0;
+  --blue-bg:  #eff5fd;
+  --blue-bd:  #90bce8;
+  --purple:   #5a3898;
+  --purp-bg:  #f4f0fc;
+  --purp-bd:  #b8a0e0;
+  --gray-bd:  #b0aca6;
+  --radius:   6px;
+  --radius-lg:10px;
+  --shadow:   0 1px 4px rgba(0,0,0,0.08);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg); color: var(--text);
+  font-family: 'Source Sans 3', 'Segoe UI', sans-serif;
+  font-size: 16px; line-height: 1.7;
+}
+header {
+  background: #0f2d52;
+  border-bottom: 3px solid #e8a030;
+  padding: 1.5rem 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 0.75rem;
+}
+.header-left {}
+.header-label {
+  font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: #7ab0de; font-weight: 600; margin-bottom: 0.3rem;
+}
+header h1 {
+  font-family: 'Google Sans Flex', 'Google Sans', sans-serif;
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  font-weight: 300; color: #ffffff; line-height: 1.15; margin-bottom: 0;
+  letter-spacing: -0.02em;
+}
+header h1 strong { font-weight: 700; color: #e8a030; }
+.header-meta { font-size: 13px; color: #7ab0de; margin-top: 0.3rem; }
+.header-meta b { color: #b8d4f0; font-weight: 600; }
+.header-badge {
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px; padding: 0.6rem 1rem;
+  font-size: 12px; color: #b8d4f0;
+}
+.header-badge strong { color: #e8a030; font-weight: 700; display: block; font-size: 13px; }
+.app {
+  display: grid;
+  grid-template-columns: 220px 1fr 260px;
+  min-height: calc(100vh - 90px);
+}
+.sidebar {
+  background: var(--bg2); border-right: 1px solid var(--border);
+  padding: 1.25rem 0; position: sticky; top: 0;
+  height: calc(100vh - 90px); overflow-y: auto;
+}
+.sidebar-section {
+  font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--text3); font-weight: 700; padding: 0 1.1rem;
+  margin: 1.25rem 0 0.4rem;
+}
+.sidebar-section:first-child { margin-top: 0; }
+.nav-item {
+  display: flex; align-items: center; gap: 9px;
+  padding: 0.5rem 1.1rem; cursor: pointer;
+  border-left: 3px solid transparent; font-size: 13.5px;
+  color: var(--text2); font-weight: 400;
+  transition: background 0.1s, color 0.1s; user-select: none; line-height: 1.3;
+}
+.nav-item:hover { background: var(--bg3); color: var(--text); }
+.nav-item.active { border-left-color: var(--accent); background: var(--blue-bg); color: var(--accent2); font-weight: 600; }
+.nav-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; background: var(--border2); }
+.nav-item.active .nav-dot, .nav-item.c-blue .nav-dot  { background: var(--accent); }
+.nav-item.c-amber .nav-dot { background: var(--amber); }
+.nav-item.c-teal  .nav-dot { background: var(--teal); }
+.nav-item.c-red   .nav-dot { background: var(--red); }
+.nav-item.c-purple .nav-dot{ background: var(--purple); }
+.nav-item.c-gray  .nav-dot { background: var(--text3); }
+.main { padding: 2rem 2rem; min-width: 0; }
+.step-panel { display: none; }
+.step-panel.visible { display: block; }
+.panel-eyebrow {
+  font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--text3); font-weight: 600; margin-bottom: 0.3rem;
+}
+.panel-title {
+  font-family: 'Google Sans Flex', 'Google Sans', sans-serif;
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  font-weight: 300; line-height: 1.2; margin-bottom: 0.25rem; color: var(--text);
+  letter-spacing: -0.02em;
+}
+.panel-title strong { font-weight: 700; }
+.panel-sub {
+  font-size: 14px; color: var(--text3); margin-bottom: 1.25rem;
+  padding-bottom: 1.25rem; border-bottom: 1px solid var(--border);
+}
+.tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1.1rem; }
+.tag {
+  font-size: 11px; padding: 3px 10px; border-radius: 20px;
+  border: 1px solid var(--border2); color: var(--text2); font-weight: 600; letter-spacing: 0.04em;
+}
+.tag.blue   { background: var(--blue-bg); border-color: var(--blue-bd); color: var(--accent2); }
+.tag.amber  { background: var(--amber-bg); border-color: var(--amber-bd); color: var(--amber); }
+.tag.teal   { background: var(--teal-bg); border-color: var(--teal-bd); color: var(--teal); }
+.tag.red    { background: var(--red-bg); border-color: var(--red-bd); color: var(--red); }
+.tag.purple { background: var(--purp-bg); border-color: var(--purp-bd); color: var(--purple); }
+.body-text { color: var(--text); line-height: 1.8; }
+.body-text p { margin-bottom: 0.85rem; }
+.body-text strong { font-weight: 700; }
+.body-text em { color: var(--accent); font-style: normal; font-weight: 600; }
+.hbox {
+  border: 1px solid var(--border); border-left: 3px solid var(--accent);
+  background: var(--blue-bg); border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 0.85rem 1.1rem; margin: 1rem 0; font-size: 15px; color: var(--text2); line-height: 1.75;
+}
+.hbox strong { color: var(--text); font-weight: 700; }
+.hbox.amber  { border-left-color: var(--amber);  background: var(--amber-bg); }
+.hbox.teal   { border-left-color: var(--teal);   background: var(--teal-bg); }
+.hbox.red    { border-left-color: var(--red);     background: var(--red-bg); }
+.hbox.purple { border-left-color: var(--purple);  background: var(--purp-bg); }
+.hbox.gray   { border-left-color: var(--gray-bd); background: var(--bg3); }
+.data-table {
+  width: 100%; border-collapse: collapse; font-size: 14px; margin: 1rem 0;
+  box-shadow: var(--shadow); border-radius: var(--radius); overflow: hidden;
+}
+.data-table th {
+  text-align: left; padding: 8px 12px; background: var(--bg4); color: var(--text2);
+  font-weight: 700; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;
+  border-bottom: 1px solid var(--border2);
+}
+.data-table td { padding: 9px 12px; border-bottom: 1px solid var(--border); color: var(--text2); vertical-align: top; }
+.data-table tr:last-child td { border-bottom: none; }
+.mat { display: inline-block; font-size: 12px; padding: 2px 9px; border-radius: 12px; font-weight: 700; }
+.mat-al { background: var(--blue-bg); color: var(--accent2); border: 1px solid var(--blue-bd); }
+.mat-fe { background: var(--bg3); color: var(--text2); border: 1px solid var(--border2); }
+.mat-cu { background: var(--amber-bg); color: var(--amber); border: 1px solid var(--amber-bd); }
+.flow {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 4px; margin: 1rem 0;
+  padding: 0.75rem 1rem; background: var(--bg3); border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+}
+.flow-node {
+  font-size: 12px; padding: 4px 11px; border-radius: var(--radius);
+  background: var(--bg2); color: var(--text2); border: 1px solid var(--border2); font-weight: 600;
+}
+.flow-arrow { color: var(--text3); font-size: 14px; }
+.img-full {
+  width: 100%; border-radius: var(--radius-lg); border: 1px solid var(--border);
+  margin: 1.1rem auto; box-shadow: var(--shadow); display: block;
+}
+.img-tower {
+  width: 100%; max-height: 320px; object-fit: cover; object-position: top;
+  border-radius: var(--radius-lg); border: 1px solid var(--border);
+  margin: 1.1rem 0; box-shadow: var(--shadow); display: block;
+}
+/* Imagen reducida con zoom al hacer clic */
+.img-zoomable {
+  display: block; cursor: zoom-in;
+  border-radius: var(--radius-lg); border: 1px solid var(--border);
+  box-shadow: var(--shadow); margin: 1.1rem auto;
+  width: 70%; max-width: 560px;
+  transition: opacity 0.15s;
+}
+.img-zoomable:hover { opacity: 0.92; }
+/* Fila de dos imágenes zoomables lado a lado */
+.img-pair {
+  display: flex; gap: 12px; margin: 1.1rem 0; align-items: flex-start;
+}
+.img-pair .img-zoomable {
+  width: 50%; max-width: 50%; margin: 0;
+  flex: 1 1 0;
+}
+/* Modal de zoom */
+.zoom-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(10,10,10,0.88);
+  z-index: 9999; align-items: center; justify-content: center;
+  cursor: zoom-out; padding: 2rem;
+}
+.zoom-overlay.active { display: flex; }
+.zoom-overlay img {
+  max-width: 92vw; max-height: 92vh;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+  cursor: zoom-out;
+}
+.zoom-close {
+  position: fixed; top: 1.25rem; right: 1.5rem;
+  font-size: 2rem; color: #fff; cursor: pointer;
+  line-height: 1; background: none; border: none;
+  opacity: 0.7; transition: opacity 0.1s;
+}
+.zoom-close:hover { opacity: 1; }
+.img-caption {
+  font-size: 12px; color: var(--text3); text-align: center;
+  margin-top: -0.6rem; margin-bottom: 1rem; font-style: italic;
+}
+.img-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 1rem 0; }
+.img-grid img {
+  width: 100%; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow);
+}
+.tower-layout { display: flex; gap: 2rem; align-items: flex-start; margin: 1.25rem 0; }
+.tower-parts { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+.part-row { display: flex; align-items: flex-start; gap: 10px; }
+.part-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+.part-label { font-size: 14px; color: var(--text2); line-height: 1.6; }
+.part-label strong { color: var(--text); font-weight: 700; }
+.part-label small { font-size: 12px; color: var(--text3); }
+.deepdive { margin-top: 1.75rem; border: 1px solid var(--teal-bd); border-radius: var(--radius-lg); overflow: hidden; }
+.deepdive-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.85rem 1.2rem; background: var(--teal-bg);
+  cursor: pointer; user-select: none; transition: background 0.12s;
+}
+.deepdive-header:hover { background: #d4ede3; }
+.dd-title-wrap { display: flex; align-items: center; gap: 10px; }
+.dd-icon {
+  width: 24px; height: 24px; border-radius: 50%; background: var(--teal); color: #fff;
+  display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; flex-shrink: 0;
+}
+.dd-title { font-size: 14px; font-weight: 700; color: var(--teal); }
+.dd-source { font-size: 11px; color: var(--text3); font-weight: 400; }
+.dd-right { display: flex; align-items: center; gap: 10px; }
+.dd-pdf-link {
+  font-size: 11px; padding: 4px 12px; border-radius: 20px;
+  background: var(--teal); color: #fff; text-decoration: none; font-weight: 700;
+  transition: background 0.12s; white-space: nowrap;
+}
+.dd-pdf-link:hover { background: #085040; }
+.dd-chevron { font-size: 14px; color: var(--text3); transition: transform 0.2s; }
+.deepdive.open .dd-chevron { transform: rotate(180deg); }
+.deepdive-body { display: none; padding: 1.25rem 1.4rem; border-top: 1px solid var(--teal-bd); background: var(--bg2); }
+.deepdive.open .deepdive-body { display: block; }
+.deepdive-body .body-text { font-size: 15px; }
+.dd-section { margin-bottom: 1.5rem; }
+.dd-section h4 {
+  font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--teal); font-weight: 700; margin-bottom: 0.5rem;
+  border-bottom: 1px solid var(--teal-bd); padding-bottom: 4px;
+}
+.type-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 8px; margin: 0.75rem 0; }
+.type-card { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius); padding: 8px 12px; }
+.type-code { font-size: 17px; font-weight: 700; color: var(--accent); margin-bottom: 2px; }
+.type-name { color: var(--text2); font-size: 12px; line-height: 1.4; }
+.alert {
+  font-size: 14px; padding: 10px 14px; border-radius: var(--radius); margin: 0.75rem 0;
+  background: var(--amber-bg); border: 1px solid var(--amber-bd); color: var(--amber); line-height: 1.6;
+}
+.alert strong { color: #7a4010; font-weight: 700; }
+.nav-footer { display: flex; justify-content: space-between; margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+.nav-btn {
+  font-family: 'Source Sans 3', sans-serif; font-size: 14px; padding: 8px 20px;
+  border-radius: var(--radius); border: 1px solid var(--border2); background: var(--bg2);
+  color: var(--text2); cursor: pointer; font-weight: 600; transition: all 0.12s;
+}
+.nav-btn:hover { background: var(--bg3); color: var(--text); }
+.nav-btn:disabled { opacity: 0.3; cursor: default; }
+.nav-btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.nav-btn.primary:hover { background: var(--accent2); }
+/* ── TABLET (hasta 1024px): colapsar columna derecha ── */
+@media (max-width: 1024px) {
+  .app { grid-template-columns: 200px 1fr; }
+  .aside-outer { display: none; }
+}
+/* ── TABLET CHICA (hasta 768px): sidebar compacta ── */
+@media (max-width: 768px) {
+  .app { grid-template-columns: 180px 1fr; }
+  .nav-item { font-size: 12.5px; padding: 0.45rem 0.9rem; }
+  .main { padding: 1.5rem 1.5rem; }
+}
+/* ── MOBILE (hasta 640px): todo en una columna ── */
+@media (max-width: 640px) {
+  .app { grid-template-columns: 1fr; }
+  .sidebar {
+    position: static; height: auto;
+    display: flex; flex-wrap: wrap; gap: 4px;
+    padding: 0.75rem 1rem; border-right: none;
+    border-bottom: 1px solid var(--border);
+    overflow-y: visible;
+  }
+  .sidebar-section { display: none; }
+  .nav-item {
+    border: 1px solid var(--border2); border-radius: 20px;
+    border-left-width: 1px; padding: 4px 12px; font-size: 12px;
+  }
+  .nav-item.active { border-color: var(--accent); background: var(--blue-bg); }
+  .main { padding: 1.1rem; }
+  .tower-layout { flex-direction: column; }
+  .img-grid { grid-template-columns: 1fr; }
+  .data-table { font-size: 12px; }
+  .data-table th, .data-table td { padding: 6px 8px; }
+  .flow { gap: 3px; }
+  .flow-node { font-size: 11px; padding: 3px 8px; }
+  .dd-right { flex-direction: column; align-items: flex-end; gap: 4px; }
+}
+
+/* ── ASIDE PANEL DERECHO ── */
+.aside-outer {
+  border-left: 1px solid var(--border);
+  background: var(--bg2);
+  position: relative;
+}
+.aside-panel {
+  padding: 1.25rem 1rem;
+  position: sticky; top: 0;
+  max-height: 100vh;
+  overflow-y: auto;
+  display: flex; flex-direction: column; gap: 1rem;
+}
+.aside-block {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 0.9rem 1rem;
+}
+.aside-block-title {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--text3); margin-bottom: 0.65rem;
+}
+.aside-concept {
+  font-size: 12px; color: var(--text2); line-height: 1.6;
+  padding: 6px 0; border-bottom: 1px solid var(--border);
+}
+.aside-concept:last-child { border-bottom: none; padding-bottom: 0; }
+.aside-concept strong { color: var(--text); font-weight: 700; font-size: 11px; display: block; margin-bottom: 1px; }
+.aside-formula {
+  background: var(--bg2); border: 1px solid var(--border2);
+  border-radius: var(--radius); padding: 8px 10px;
+  font-size: 15px; text-align: center; color: var(--accent2);
+  font-weight: 700; letter-spacing: 0.04em; margin: 4px 0;
+}
+.aside-formula-sub { font-size: 11px; color: var(--text3); margin-top: 5px; line-height: 1.5; }
+.aside-link {
+  display: flex; align-items: center; gap: 7px;
+  font-size: 12px; color: var(--teal); text-decoration: none;
+  padding: 6px 0; border-bottom: 1px solid var(--border);
+  font-weight: 600; transition: color 0.1s; line-height: 1.4;
+}
+.aside-link:last-child { border-bottom: none; }
+.aside-link:hover { color: #085040; }
+.aside-link svg { flex-shrink: 0; }
+.aside-sabias {
+  font-size: 12px; color: var(--text2); line-height: 1.65;
+  padding: 6px 0; border-bottom: 1px solid var(--border);
+}
+.aside-sabias:last-child { border-bottom: none; padding-bottom: 0; }
+.aside-sabias::before { content: "→ "; color: var(--accent); font-weight: 700; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <p class="header-label">Instalación, Mantenimiento y Reparación · 7° año Informática — ILM</p>
+    <h1>El <strong>Sistema Eléctrico</strong> Argentino</h1>
+    <p class="header-meta">Guion didáctico · Unidad 01 &nbsp;·&nbsp; <b>Prof. Pedaci, Lourdes</b> &nbsp;·&nbsp; Instituto Leonardo Murialdo</p>
+  </div>
+  <div class="header-badge">
+    <div>
+      <strong>8 pasos</strong>
+      De la generación al consumidor final
+    </div>
+  </div>
+</header>
+
+<div class="app">
+<nav class="sidebar">
+  <p class="sidebar-section">Introducción</p>
+  <div class="nav-item c-blue active" onclick="showStep(0)"><span class="nav-dot"></span>Intro — MEM</div>
+  <p class="sidebar-section">Recorrido de la energía</p>
+  <div class="nav-item c-amber"  onclick="showStep(1)"><span class="nav-dot"></span>Paso 1 — Generación</div>
+  <div class="nav-item c-gray"   onclick="showStep(2)"><span class="nav-dot"></span>Paso 2 — Cables</div>
+  <div class="nav-item c-teal"   onclick="showStep(3)"><span class="nav-dot"></span>Paso 3 — Torres</div>
+  <div class="nav-item c-blue"   onclick="showStep(4)"><span class="nav-dot"></span>Paso 4 — Transporte</div>
+  <div class="nav-item c-purple" onclick="showStep(5)"><span class="nav-dot"></span>Paso 5 — Subestaciones</div>
+  <div class="nav-item c-teal"   onclick="showStep(6)"><span class="nav-dot"></span>Paso 6 — Distribución</div>
+  <p class="sidebar-section">Marco regulatorio</p>
+  <div class="nav-item c-red" onclick="showStep(7)"><span class="nav-dot"></span>Regulación — MEM 02</div>
+</nav>
+
+<main class="main">
+
+<!-- PANEL 0 -->
+<section class="step-panel visible" id="panel-0">
+  <p class="panel-eyebrow">Introducción · Diagrama MEM 01 — bloque superior</p>
+  <h2 class="panel-title">El <strong>Mercado Eléctrico Mayorista</strong> (M.E.M.)</h2>
+  <p class="panel-sub">Administración y coordinación del sistema nacional — CAMMESA</p>
+  <div class="tag-row">
+    <span class="tag blue">MEM</span><span class="tag blue">CAMMESA</span><span class="tag">Mercado mayorista</span>
+  </div>
+  <img src="assets/pictures/MEM_01.png" alt="Diagrama MEM 01 — recorrido de la energía desde generación hasta consumidores finales" class="img-full">
+  <p class="img-caption">Diagrama MEM 01 — El recorrido completo de la energía eléctrica en Argentina</p>
+  <div class="body-text">
+    <p>Para entender cómo llega la electricidad a nuestras casas, primero presentamos al <strong>Mercado Eléctrico Mayorista (M.E.M.)</strong>. No es un lugar físico: es el sistema donde se realizan las transacciones de compra y venta de energía eléctrica en grandes volúmenes entre los actores del sector — generadores, distribuidores, grandes usuarios y transportistas.</p>
+    <p>En el M.E.M. conviven quienes producen la energía y quienes la compran para llevarla a los usuarios finales. La energía se "despacha" en tiempo real: en cada momento se decide qué central genera, cuánto y a qué costo, para satisfacer la demanda del país de la forma más eficiente posible.</p>
+    <p>Es importante entender que en Argentina la electricidad <em>no se almacena masivamente</em>: lo que se genera en un instante debe consumirse en ese mismo instante. Por eso la coordinación del sistema es crítica.</p>
+  </div>
+  <div class="hbox blue">
+    <strong>¿Qué es CAMMESA?</strong><br>
+    La <strong>Compañía Administradora del Mercado Mayorista Eléctrico</strong> es el organismo técnico-operativo que coordina el funcionamiento del M.E.M. Es una sociedad anónima <em>sin fines de lucro</em>, integrada por el Estado Nacional y las asociaciones de distribuidores, generadores y transportistas del M.E.M.<br><br>
+    <strong>Sus funciones principales:</strong><br>
+    · <strong>Despacho técnico y económico:</strong> decide en tiempo real qué central debe generar energía para cubrir la demanda al menor costo posible.<br>
+    · <strong>Transacciones económicas:</strong> calcula y liquida los pagos entre generadores, transportistas y distribuidores.<br>
+    · <strong>Evaluación de acceso al SADI:</strong> analiza técnicamente las solicitudes de conexión a la red nacional.<br>
+    · <strong>Procedimientos técnicos:</strong> dicta las normas operativas que rigen el funcionamiento del sistema eléctrico.
+  </div>
+  <div class="nav-footer">
+    <button class="nav-btn" disabled>← Anterior</button>
+    <button class="nav-btn primary" onclick="showStep(1)">Siguiente →</button>
+  </div>
+</section>
+
+<!-- PANEL 1 -->
+<section class="step-panel" id="panel-1">
+  <p class="panel-eyebrow">Paso 1 · Diagrama MEM 01 — bloque INICIO</p>
+  <h2 class="panel-title">El inicio: <strong>proceso de generación</strong> de energía</h2>
+  <p class="panel-sub">Fuentes, tipos de centrales y niveles de tensión de salida</p>
+  <div class="tag-row">
+    <span class="tag amber">Generación distribuida</span><span class="tag amber">Media tensión</span><span class="tag">SADI</span>
+  </div>
+  <img src="assets/pictures/generacion.jpg" alt="Mapa del sistema eléctrico nacional con generación, transporte (tendido 500 kV) y distribución en Argentina" class="img-zoomable" onclick="openZoom(this)">
+  <p class="img-caption">Sistema eléctrico nacional — etapas y principales actores (Fuente: Secretaría de Gobierno de Energía)</p>
+  <div class="body-text">
+    <p>El proceso comienza en las <strong>centrales generadoras</strong>. Argentina cuenta con una matriz energética diversa:</p>
+  </div>
+  <div class="hbox amber">
+    <strong>Térmicas:</strong> gas natural, fuel oil o carbón — Ensenada de Barragán (~1.200 MW), Río Turbio (~240 MW).<br><br>
+    <strong>Hidroeléctricas:</strong> aprovechan la energía cinética del agua — Yacyretá (~3.100 MW), Salto Grande (~1.890 MW), El Chocón (~1.200 MW).<br><br>
+    <strong>Nucleares:</strong> fisión del uranio — Atucha I (~360 MW), Atucha II (~745 MW), Embalse (~600 MW).<br><br>
+    <strong>Eólicas y solares:</strong> Cauchari (Jujuy, ~300 MW), Arauco (La Rioja, ~100 MW), Rawson (Chubut, ~50 MW).
+  </div>
+  <div class="body-text">
+    <p>La energía se genera en <strong>media tensión</strong>. Para transportarla eficientemente a largas distancias debe elevarse: reducir la corriente minimiza las pérdidas por <em>efecto Joule</em> (P = I² × R).</p>
+  </div>
+  <div class="flow">
+    <span class="flow-node">Centrales generadoras</span><span class="flow-arrow">→</span>
+    <span class="flow-node">Media tensión (M.T.)</span><span class="flow-arrow">→</span>
+    <span class="flow-node">Subestación M.T. → A.T.</span><span class="flow-arrow">→</span>
+    <span class="flow-node">SADI</span>
+  </div>
+  <div class="nav-footer">
+    <button class="nav-btn" onclick="showStep(0)">← Anterior</button>
+    <button class="nav-btn primary" onclick="showStep(2)">Siguiente →</button>
+  </div>
+</section>
+
+<!-- PANEL 2 -->
+<section class="step-panel" id="panel-2">
+  <p class="panel-eyebrow">Paso 2 · Contexto técnico del SADI</p>
+  <h2 class="panel-title">Los <strong>cables</strong>: conductores de la red de transmisión</h2>
+  <p class="panel-sub">Materiales, características y criterios de selección</p>
+  <div class="tag-row">
+    <span class="tag">Aluminio</span><span class="tag">Acero</span><span class="tag">Cobre</span>
+    <span class="tag amber">ACSR</span><span class="tag">Cables desnudos</span>
+  </div>
+  <div class="body-text">
+    <p>Los conductores utilizados en las líneas aéreas son básicamente <strong>cobre, aluminio y acero</strong>. Son <em>cables desnudos</em> — sin cobertura aislante. La aislación la proveen los aisladores instalados en cada estructura de soporte.</p>
+  </div>
+  <table class="data-table">
+    <thead><tr><th>Material</th><th>Uso típico</th><th>Ventajas</th><th>Limitaciones</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><span class="mat mat-al">Aluminio (Al)</span></td>
+        <td>Líneas aéreas de A.T. (500 kV, 132 kV, 66 kV)</td>
+        <td>Liviano, abundante, bajo costo, buena conductividad</td>
+        <td>Menor resistencia mecánica — se combina con alma de acero</td>
+      </tr>
+      <tr>
+        <td><span class="mat mat-fe">Acero (Fe)</span></td>
+        <td>Alma del cable ACSR e hilo de guardia</td>
+        <td>Alta resistencia a tracción, soporta el peso del vano</td>
+        <td>Mala conductividad eléctrica — no se usa solo como conductor</td>
+      </tr>
+      <tr>
+        <td><span class="mat mat-cu">Cobre (Cu)</span></td>
+        <td>Redes urbanas de M.T. y B.T., interior de edificios</td>
+        <td>Máxima conductividad, compacto, fácil de trabajar</td>
+        <td>Muy pesado y costoso — inviable en líneas aéreas largas</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="hbox gray">
+    <strong>Cable ACSR (Aluminum Conductor Steel Reinforced):</strong> el conductor más usado en transmisión de alta tensión. Hilos de aluminio trenzados alrededor de un alma central de acero. El aluminio conduce la corriente; el acero soporta el peso mecánico del vano entre torres.
+  </div>
+  <div class="hbox">
+    <strong>Hilo de guardia:</strong> cable de acero instalado por encima de los conductores de fase, conectado a tierra en cada estructura. Genera un plano a 0 V que protege la línea ante la caída de un rayo. No conduce energía.
+  </div>
+  <div class="hbox blue">
+    <strong>Niveles de tensión en Argentina:</strong><br>
+    · Baja tensión: 220 / 380 V &nbsp;·&nbsp; Media tensión: 13,2 kV — 33 kV<br>
+    · Alta tensión: 66 kV — 132 kV — 220 kV — 330 kV &nbsp;·&nbsp; Extra alta tensión: 500 kV
+  </div>
+  <div class="body-text">
+    <p><strong>¿Por qué se transmite en alta tensión?</strong> La ley de Joule: P = I² × R. Al subir la tensión 100 veces, la corriente baja 100 veces — las pérdidas se reducen drásticamente para la misma potencia transportada.</p>
+  </div>
+  <div class="nav-footer">
+    <button class="nav-btn" onclick="showStep(1)">← Anterior</button>
+    <button class="nav-btn primary" onclick="showStep(3)">Siguiente →</button>
+  </div>
+</section>
+
+<!-- PANEL 3 -->
+<section class="step-panel" id="panel-3">
+  <p class="panel-eyebrow">Paso 3 · Infraestructura física del sistema de A.T.</p>
+  <h2 class="panel-title">Las <strong>torres eléctricas</strong>: estructura y partes</h2>
+  <p class="panel-sub">Componentes, tipos de aisladores y configuraciones de fase</p>
+  <div class="tag-row">
+    <span class="tag teal">Torres metálicas</span><span class="tag teal">Aisladores</span>
+    <span class="tag teal">Cable de guardia</span><span class="tag">Crucetas / ménsulas</span>
+    <span class="tag">Cimentación</span>
+  </div>
+  <img src="assets/pictures/torre_foto.jpg" alt="Foto de torre de alta tensión vista desde abajo mostrando estructura reticulada de acero, crucetas, aisladores y conductores" class="img-tower">
+  <p class="img-caption">Torre de alta tensión — estructura reticulada de acero galvanizado, cadenas de aisladores y conductores de fase (ACSR)</p>
+
+  <div class="tower-layout">
+    <svg width="118" height="265" viewBox="0 0 118 265" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagrama esquemático de torre eléctrica con partes identificadas por color">
+      <title>Partes de una torre eléctrica de alta tensión</title>
+      <line x1="59" y1="7" x2="7" y2="7" stroke="#a02020" stroke-width="1.8" stroke-dasharray="3,2"/>
+      <line x1="59" y1="7" x2="111" y2="7" stroke="#a02020" stroke-width="1.8" stroke-dasharray="3,2"/>
+      <circle cx="59" cy="7" r="3.5" fill="#a02020"/>
+      <line x1="59" y1="7" x2="59" y2="245" stroke="#6a6560" stroke-width="3.5"/>
+      <line x1="16" y1="48" x2="102" y2="48" stroke="#4a4740" stroke-width="2.5"/>
+      <rect x="12" y="52" width="6" height="13" rx="2" fill="#1a5fa8"/>
+      <rect x="100" y="52" width="6" height="13" rx="2" fill="#1a5fa8"/>
+      <line x1="15" y1="65" x2="0" y2="65" stroke="#b06010" stroke-width="2.5"/>
+      <line x1="106" y1="65" x2="118" y2="65" stroke="#b06010" stroke-width="2.5"/>
+      <line x1="11" y1="106" x2="107" y2="106" stroke="#4a4740" stroke-width="2.5"/>
+      <rect x="7" y="110" width="6" height="13" rx="2" fill="#1a5fa8"/>
+      <rect x="105" y="110" width="6" height="13" rx="2" fill="#1a5fa8"/>
+      <line x1="10" y1="123" x2="0" y2="123" stroke="#b06010" stroke-width="2.5"/>
+      <line x1="113" y1="123" x2="118" y2="123" stroke="#b06010" stroke-width="2.5"/>
+      <line x1="6" y1="162" x2="112" y2="162" stroke="#4a4740" stroke-width="2.5"/>
+      <rect x="2" y="166" width="6" height="13" rx="2" fill="#1a5fa8"/>
+      <rect x="110" y="166" width="6" height="13" rx="2" fill="#1a5fa8"/>
+      <line x1="5" y1="179" x2="0" y2="179" stroke="#b06010" stroke-width="2.5"/>
+      <line x1="116" y1="179" x2="118" y2="179" stroke="#b06010" stroke-width="2.5"/>
+      <line x1="51" y1="218" x2="34" y2="245" stroke="#6a6560" stroke-width="2"/>
+      <line x1="67" y1="218" x2="84" y2="245" stroke="#6a6560" stroke-width="2"/>
+      <rect x="24" y="243" width="24" height="9" rx="2" fill="#9a9590"/>
+      <rect x="70" y="243" width="24" height="9" rx="2" fill="#9a9590"/>
+      <line x1="51" y1="74" x2="59" y2="106" stroke="#c0bbb5" stroke-width="1"/>
+      <line x1="67" y1="74" x2="59" y2="106" stroke="#c0bbb5" stroke-width="1"/>
+      <line x1="51" y1="132" x2="59" y2="162" stroke="#c0bbb5" stroke-width="1"/>
+      <line x1="67" y1="132" x2="59" y2="162" stroke="#c0bbb5" stroke-width="1"/>
+      <line x1="51" y1="188" x2="59" y2="218" stroke="#c0bbb5" stroke-width="1"/>
+      <line x1="67" y1="188" x2="59" y2="218" stroke="#c0bbb5" stroke-width="1"/>
+    </svg>
+    <div class="tower-parts">
+      <div class="part-row"><div class="part-dot" style="background:#a02020"></div>
+        <div class="part-label"><strong>Cable de guardia</strong><br><small>Acero, en la punta. Protege contra rayos. Conectado a tierra en cada estructura.</small></div></div>
+      <div class="part-row"><div class="part-dot" style="background:#4a4740"></div>
+        <div class="part-label"><strong>Crucetas (travesaños)</strong><br><small>Brazos horizontales que separan las fases. Ménsula: sale hacia un lado. Cruceta: cruza en ambos sentidos.</small></div></div>
+      <div class="part-row"><div class="part-dot" style="background:#1a5fa8"></div>
+        <div class="part-label"><strong>Aisladores</strong><br><small>Porcelana, vidrio templado o polímero. Impiden que la corriente baje por la estructura metálica.</small></div></div>
+      <div class="part-row"><div class="part-dot" style="background:#b06010"></div>
+        <div class="part-label"><strong>Conductores de fase (ACSR)</strong><br><small>Cables desnudos. En 500 kV cada fase puede llevar 2–4 cables en paralelo ("haz de conductores").</small></div></div>
+      <div class="part-row"><div class="part-dot" style="background:#6a6560"></div>
+        <div class="part-label"><strong>Fuste / mástil en celosía</strong><br><small>Acero galvanizado con triangulaciones atornilladas. Vida útil mayor a 50 años.</small></div></div>
+      <div class="part-row"><div class="part-dot" style="background:#9a9590; border:1px solid #6a6560"></div>
+        <div class="part-label"><strong>Cimentación</strong><br><small>Hormigón armado enterrado. Resiste las cargas de viento y la tensión mecánica de los cables.</small></div></div>
+    </div>
+  </div>
+
+  <div class="hbox teal">
+    <strong>Tipos de estructura por función:</strong><br>
+    · <strong>S — Suspensión:</strong> la más común, tramos rectos. Los cables cuelgan de los aisladores.<br>
+    · <strong>T — Terminal:</strong> inicio y fin de la línea.<br>
+    · <strong>RR — Retención recta:</strong> anclaje intermedio en tramos largos (cada 12–15 suspensiones).<br>
+    · <strong>RA — Retención angular:</strong> en cambios de dirección (ej: RA20°).<br>
+    · Altura extra: S+1, S+2,5, RR+2. Código adicional: U (urbano), R (rural), CR (cruce ruta).
+  </div>
+
+  <div class="deepdive" id="dd-torres">
+    <div class="deepdive-header" onclick="toggleDD('dd-torres')">
+      <div class="dd-title-wrap">
+        <span class="dd-icon">+</span>
+        <div>
+          <div class="dd-title">Profundizá — Tipos de estructuras, aisladores y configuraciones de fase</div>
+          <div class="dd-source">Fuente: UTN Reconquista · Ing. Claudio Cendra — Líneas aéreas de Media y Alta Tensión</div>
+        </div>
+      </div>
+      <div class="dd-right">
+        <a href="https://drive.google.com/file/d/1xdJzMssXaF-a0GoKTji0yR96l1slENR7/view?usp=sharing" target="_blank" class="dd-pdf-link" onclick="event.stopPropagation()">📄 Ver PDF completo</a>
+        <span class="dd-chevron">▾</span>
+      </div>
+    </div>
+    <div class="deepdive-body">
+      <div class="dd-section">
+        <h4>Materiales de las estructuras</h4>
+        <div class="body-text">
+          <p><strong>Madera (eucalipto):</strong> líneas rurales de 13,2 kV y 33 kV. Troncos rectos impregnados con creosota o sal para resistir humedad. Normas IRAM 9501–9593.</p>
+          <p><strong>Hormigón armado centrifugado / pretensado:</strong> media tensión y líneas de 132 kV. El pretensado tensiona la armadura antes de colar; al fraguar, la tensión residual aumenta la resistencia mecánica.</p>
+          <p><strong>Metálicas reticuladas (celosía):</strong> acero galvanizado con triangulaciones atornilladas en obra. Las más usadas en 132 kV, 220 kV y 500 kV. El galvanizado (zinc) protege contra la corrosión.</p>
+          <p><strong>Tubulares metálicas:</strong> postes cilíndricos de chapa de acero cilindrada, principalmente en media tensión urbana.</p>
+        </div>
+        <div class="img-grid">
+          <div><img src="assets/pictures/figura8.jpg" alt="Postes metálicos de celosía — cuatro fotografías de torres de alta tensión"><p class="img-caption" style="text-align:left;margin-top:4px">Fig. 8: Postes metálicos de celosía</p></div>
+          <div><img src="assets/pictures/figura12.jpg" alt="Torre de alta tensión de 35 kV de estructura monoposte metálica"><p class="img-caption" style="text-align:left;margin-top:4px">Fig. 12: Torre monoposte metálica (35 kV)</p></div>
+        </div>
+        <div class="img-grid">
+          <div><img src="assets/pictures/figura9.jpg" alt="Tipos de postes de madera: alineación recta, con anclaje, doble, tornapunta y en A"><p class="img-caption" style="text-align:left;margin-top:4px">Fig. 9: Tipos de postes — alineación, anclaje, doble, tornapunta, en A</p></div>
+          <div><img src="assets/pictures/figura10.jpg" alt="Diferentes tipos de apoyos de hormigón para alumbrado exterior, baja y media tensión"><p class="img-caption" style="text-align:left;margin-top:4px">Fig. 10: Apoyos de hormigón (B.T. y M.T.)</p></div>
+        </div>
+      </div>
+      <div class="dd-section">
+        <h4>Torres metálicas vs altura según nivel de tensión</h4>
+        <img src="assets/pictures/figura11.jpg" alt="Comparativa de torres metálicas usadas en alta tensión versus su altura: de 45 kV a 330-420 kV" class="img-full">
+        <p class="img-caption">Fig. 11: A mayor nivel de tensión, mayor altura requiere la torre</p>
+      </div>
+      <div class="dd-section">
+        <h4>Tipos de aisladores</h4>
+        <div class="body-text">
+          <p><strong>Perno rígido:</strong> el cable "apoya" sobre el aislador. Se usa en media tensión.</p>
+          <p><strong>Cadena de aisladores suspendidos:</strong> discos colgantes. Forma habitual en media, alta y extra alta tensión. En 500 kV la cadena puede tener 20–30 discos. Los de vidrio templado (verde) se fracturan visiblemente ante falla, facilitando inspección desde tierra.</p>
+          <p>Materiales: porcelana (marrón/gris), vidrio templado (verde), polímero/resina sintética (gris).</p>
+        </div>
+      </div>
+      <div class="dd-section">
+        <h4>Configuraciones de fases</h4>
+        <div class="body-text">
+          <p>En media y alta tensión las líneas <strong>no tienen neutro</strong> — solo las fases (sistema trifásico). Los conductores pueden disponerse en distintos planos:</p>
+          <p><strong>Coplanar horizontal:</strong> las tres fases en un mismo plano horizontal, una al lado de otra.</p>
+          <p><strong>Coplanar vertical:</strong> las tres fases una debajo de otra en el mismo mástil.</p>
+          <p><strong>Triangular:</strong> fases en los vértices de un triángulo — reduce la inductancia mutua entre conductores.</p>
+          <p>Una misma estructura puede transportar <strong>simple, doble, triple o cuádruple terna</strong> según la potencia del corredor eléctrico.</p>
+        </div>
+      </div>
+      <div class="dd-section">
+        <h4>Sistema de nomenclatura de estructuras</h4>
+        <div class="type-grid">
+          <div class="type-card"><div class="type-code">S</div><div class="type-name">Suspensión — tramo recto</div></div>
+          <div class="type-card"><div class="type-code">T</div><div class="type-name">Terminal — inicio / fin de línea</div></div>
+          <div class="type-card"><div class="type-code">RR</div><div class="type-name">Retención recta — anclaje intermedio</div></div>
+          <div class="type-card"><div class="type-code">RAα°</div><div class="type-name">Retención angular — cambio de dirección</div></div>
+          <div class="type-card"><div class="type-code">S+N</div><div class="type-name">Suspensión con altura extra (ej: S+2,5)</div></div>
+          <div class="type-card"><div class="type-code">SU / SR</div><div class="type-name">Urbana / Rural</div></div>
+          <div class="type-card"><div class="type-code">RCR</div><div class="type-name">Retención cruce de ruta</div></div>
+          <div class="type-card"><div class="type-code">E</div><div class="type-name">Estructura especial</div></div>
+        </div>
+        <div class="body-text" style="margin-top:0.75rem">
+          <p>Ejemplo de distribución en un tramo de 23 piquetes:<br>
+          <code style="background:var(--bg3);padding:4px 8px;border-radius:4px;font-size:13px">T — S×10 — RR — S×10 — RA</code></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="body-text" style="margin-top:1.5rem;">
+    <p>La siguiente imagen muestra en detalle los componentes de una <strong>conexión entre conductor y torre</strong>: la cadena de aisladores, la grapa de amarre, el descargador de arco eléctrico y el amortiguador de vibraciones mecánicas.</p>
+  </div>
+  <img src="assets/pictures/figura13.jpg" alt="Detalle de la conexión entre conductor y torre: cadena de aisladores, grapa de amarre, descargador de arco eléctrico, amortiguador de vibraciones mecánicas y conductor" class="img-zoomable" onclick="openZoom(this)">
+  <p class="img-caption">Fig. 13: Componentes de la conexión conductor–torre — cadena de aisladores, grapa de amarre, descargador de arco eléctrico y amortiguador de vibraciones</p>
+
+  <div class="nav-footer">
+    <button class="nav-btn" onclick="showStep(2)">← Anterior</button>
+    <button class="nav-btn primary" onclick="showStep(4)">Siguiente →</button>
+  </div>
+</section>
+
+<!-- PANEL 4 -->
+<section class="step-panel" id="panel-4">
+  <p class="panel-eyebrow">Paso 4 · Diagrama MEM 01 — zona ARCOS / NODOS</p>
+  <h2 class="panel-title">Los arcos: <strong>transporte de la electricidad</strong> (SADI)</h2>
+  <p class="panel-sub">Sistema Argentino de Interconexión — dos subsistemas de transporte</p>
+  <div class="tag-row">
+    <span class="tag blue">SADI</span><span class="tag blue">Transener</span><span class="tag blue">STAT</span>
+    <span class="tag">Sistema Troncal</span><span class="tag teal">Interconexiones internacionales</span>
+  </div>
+  <div class="body-text">
+    <p>El <strong>Sistema Argentino de Interconexión (SADI)</strong> es la red de transmisión de energía eléctrica que conecta las centrales generadoras con los centros de consumo en todo el país. No es una sola empresa ni una sola línea: es un conjunto de infraestructuras físicas (líneas de alta tensión, subestaciones, torres) y una organización de actores que operan coordinadamente bajo la supervisión de CAMMESA.</p>
+    <p>En el diagrama MEM 01, la zona entre generadores y distribuidores se denomina <strong>ARCOS</strong>: los vínculos de transporte entre nodos. El SADI conecta prácticamente todo el país — excepto Tierra del Fuego, que opera con un sistema aislado propio.</p>
+    <p>Una característica fundamental del SADI es que permite que la energía generada en cualquier punto del país pueda ser consumida en cualquier otro, aprovechando las fuentes más eficientes disponibles en cada momento. Por ejemplo, en períodos de lluvias, la energía hidroeléctrica patagónica puede alimentar el AMBA; en períodos secos, las centrales térmicas del litoral compensan la caída hidráulica. Esta flexibilidad es posible gracias a la interconexión.</p>
+    <p>Funciona en dos niveles de tensión y empresas diferentes:</p>
+  </div>
+
+  <div class="hbox blue">
+    <strong>TRANSENER — Extra Alta Tensión (500 kV) · STAT</strong><br>
+    Es la empresa concesionaria que opera y mantiene el <em>Sistema de Transporte de Alta Tensión (STAT)</em>: las líneas de 500 kV que mueven la energía entre regiones del país.<br><br>
+    Es una sociedad entre Pampa Energía y el Estado Nacional (a través de Iesa/ex-Enarsa). El operador es Pampa Energía, del grupo Mindlin. Está manejada por la Secretaría de Energía.<br><br>
+    <strong>Obligaciones:</strong><br>
+    · Operar y mantener la red de alta tensión concesionada.<br>
+    · Garantizar la continuidad ininterrumpida del transporte.<br>
+    · Asumir las inversiones para la expansión del sistema de transmisión.
+  </div>
+
+  <div class="hbox">
+    <strong>Red Troncal — Alta Tensión (132 kV) · Sistema Troncal (ST)</strong><br>
+    Transporta la electricidad <em>dentro de una misma región</em>, entre plantas generadoras y distribuidores. La operan empresas regionales, una por zona:<br><br>
+    · <strong>Transba</strong> — Formosa, Chaco, Corrientes, parte de Entre Ríos y Bs. As./AMBA<br>
+    · <strong>Transnoa</strong> — Tucumán, Catamarca, La Rioja, Salta, Jujuy, Santiago del Estero<br>
+    · <strong>Distrocuyo</strong> — San Juan y Mendoza<br>
+    · <strong>Transcomahue</strong> — Río Negro, Neuquén y parte de La Pampa<br>
+    · <strong>Transpa</strong> — el resto de la Patagonia
+  </div>
+
+  <div class="body-text">
+    <p>Además existen <strong>interconexiones internacionales</strong> con Uruguay, Brasil, Chile y Paraguay, que permiten intercambiar energía según disponibilidad y demanda regional.</p>
+  </div>
+  <div class="nav-footer">
+    <button class="nav-btn" onclick="showStep(3)">← Anterior</button>
+    <button class="nav-btn primary" onclick="showStep(5)">Siguiente →</button>
+  </div>
+</section>
+
+<!-- PANEL 5 -->
+<section class="step-panel" id="panel-5">
+  <p class="panel-eyebrow">Paso 5 · Diagrama MEM 01 — NODOS secundarios</p>
+  <h2 class="panel-title">Los nodos: <strong>subestaciones de transformación</strong></h2>
+  <p class="panel-sub">Reducción progresiva de la tensión hacia el consumidor</p>
+  <div class="tag-row">
+    <span class="tag purple">Alta tensión 500/132 kV</span>
+    <span class="tag purple">Media tensión 13,2–33 kV</span>
+    <span class="tag">Baja tensión 220 V</span>
+  </div>
+  <div class="body-text">
+    <p>Una <strong>subestación de transformación</strong> es una instalación eléctrica cuya función principal es modificar los niveles de tensión de la energía para adecuarlos a las diferentes etapas de la red. Sin ellas, sería imposible llevar la electricidad desde las grandes centrales hasta los hogares.</p>
+    <p>El principio que utilizan es el del <strong>transformador eléctrico</strong>: un dispositivo que, aprovechando la inducción electromagnética, transfiere energía entre dos circuitos cambiando la tensión. Al "subir" la tensión, la corriente baja y las pérdidas en el transporte se reducen. Al "bajar" la tensión, la corriente sube y la energía queda lista para el uso doméstico o industrial.</p>
+    <p>La reducción de tensión es <em>progresiva</em>: no se pasa de 500 kV a 220 V en un solo paso. El proceso ocurre en varias etapas para garantizar seguridad, eficiencia y control en cada punto de la red.</p>
+  </div>
+  <div class="hbox purple">
+    <strong>Subestación (A.T. → M.T.):</strong> recibe energía en alta tensión (500 kV o 132 kV) y la transforma a media tensión (33 kV o 13,2 kV) para distribución regional.<br><br>
+    <strong>Centros de transformación:</strong> transformadores en postes o cabinas a pie de calle. Llevan la energía de media tensión a <strong>baja tensión (220 V)</strong>, lista para el usuario final.
+  </div>
+  <div class="flow">
+    <span class="flow-node">A.T. (500/132 kV)</span><span class="flow-arrow">→</span>
+    <span class="flow-node">Subestación A.T. → M.T.</span><span class="flow-arrow">→</span>
+    <span class="flow-node">M.T. (13,2–33 kV)</span><span class="flow-arrow">→</span>
+    <span class="flow-node">Centro transformación</span><span class="flow-arrow">→</span>
+    <span class="flow-node">220 V (usuario)</span>
+  </div>
+  <div class="body-text">
+    <p>Subestaciones importantes en Argentina: <strong>Campana</strong> (Buenos Aires), <strong>Dock Sud</strong> (Avellaneda), <strong>Rosario</strong> (Santa Fe), <strong>Río Turbio</strong> (Santa Cruz).</p>
+  </div>
+  <div class="nav-footer">
+    <button class="nav-btn" onclick="showStep(4)">← Anterior</button>
+    <button class="nav-btn primary" onclick="showStep(6)">Siguiente →</button>
+  </div>
+</section>
+
+<!-- PANEL 6 -->
+<section class="step-panel" id="panel-6">
+  <p class="panel-eyebrow">Paso 6 · Diagrama MEM 01 — bloque FINAL</p>
+  <h2 class="panel-title">El final: <strong>distribuidores y consumidores</strong></h2>
+  <p class="panel-sub">Empresas concesionarias y tipos de usuarios finales</p>
+  <div class="tag-row">
+    <span class="tag teal">Distribuidores</span><span class="tag">Grandes usuarios</span>
+    <span class="tag">Usuarios residenciales</span><span class="tag">Cooperativas</span>
+  </div>
+  <div class="body-text">
+    <p>Los <strong>distribuidores</strong> son empresas concesionarias que operan las redes de media y baja tensión dentro de un área geográfica específica, llevando la energía hasta el medidor del usuario.</p>
+  </div>
+  <div class="hbox teal">
+    <strong>Obligaciones de los distribuidores (MEM 02):</strong><br>
+    · Proporcionar el servicio a todos los usuarios finales que lo soliciten en su área de concesión.<br>
+    · Definir y garantizar la calidad del servicio.<br>
+    · Asumir las inversiones para la expansión del sistema de distribución.
+  </div>
+  <div class="body-text">
+    <p>Distribuidoras principales: <strong>Edenor</strong> (norte del GBA), <strong>Edesur</strong> (sur del GBA y CABA), <strong>Edelap</strong> (La Plata), <strong>Eden</strong> y <strong>Edes</strong> (interior bonaerense). En muchas localidades del interior operan <strong>cooperativas eléctricas municipales</strong>.</p>
+  <div class="img-pair">
+    <img src="assets/pictures/edenor.webp"
+         alt="Subestación de Edenor — empresa distribuidora del norte del Gran Buenos Aires"
+         class="img-zoomable" onclick="openZoom(this)">
+    <img src="assets/pictures/edesur.webp"
+         alt="Instalaciones de Edesur con transformador visible — empresa distribuidora del sur del GBA y CABA"
+         class="img-zoomable" onclick="openZoom(this)">
+  </div>
+  <p class="img-caption">Edenor (izq.) y Edesur (der.) — las dos principales distribuidoras del Área Metropolitana de Buenos Aires</p>
+  </div>
+  <div class="hbox">
+    <strong>Consumidores finales:</strong><br>
+    · <strong>Grandes usuarios:</strong> industrias y comercios de gran consumo — reciben en M.T. o B.T. directamente.<br>
+    · <strong>Usuarios residenciales:</strong> hogares — reciben el servicio en baja tensión (220 V).
+  </div>
+  <div class="nav-footer">
+    <button class="nav-btn" onclick="showStep(5)">← Anterior</button>
+    <button class="nav-btn primary" onclick="showStep(7)">Siguiente →</button>
+  </div>
+</section>
+
+<!-- PANEL 7 -->
+<section class="step-panel" id="panel-7">
+  <p class="panel-eyebrow">Marco regulatorio · Diagrama MEM 02 — bloque inferior</p>
+  <h2 class="panel-title">El marco <strong>regulatorio</strong> (MEM 02)</h2>
+  <p class="panel-sub">Secretaría de Energía y ENRE — control del sistema como servicio público</p>
+  <div class="tag-row">
+    <span class="tag red">Secretaría de Energía</span><span class="tag red">ENRE</span>
+    <span class="tag">Servicio público</span><span class="tag">Concesiones</span>
+  </div>
+  <img src="assets/pictures/MEM_02.png" alt="Diagrama MEM 02 — Marco regulatorio: obligaciones de transportistas y distribuidores, Secretaría de Energía y ENRE" class="img-full">
+  <p class="img-caption">Diagrama MEM 02 — Marco regulatorio del sistema eléctrico argentino</p>
+  <div class="body-text">
+    <p>El transporte y la distribución son <em>servicios públicos</em> que operan en mercados sujetos a la regulación del ENRE. El sistema está regido por leyes y normas que fijan los lineamientos generales del M.E.M.</p>
+  </div>
+  <div class="hbox red">
+    <strong>Secretaría de Energía — hace política:</strong><br>
+    · Fija las normas que regulan el sistema eléctrico nacional.<br>
+    · Define y supervisa las políticas para el sector eléctrico.<br>
+    · Promueve el desarrollo integral y el funcionamiento racional del sistema.
+  </div>
+  <div class="hbox red">
+    <strong>ENRE — hace control:</strong><br>
+    · Tiene a su cargo el control de las empresas concesionarias.<br>
+    · Defensa de los usuarios, medioambiente, propiedad privada y seguridad pública.<br>
+    · Hace cumplir la legislación vigente y dicta reglamentos de normas y procedimientos técnicos.<br>
+    · Fija las <em>bases de cálculo</em> de tarifas para distribuidores y transportistas.<br>
+    · Aplica penalizaciones y realiza audiencias públicas.<br>
+    · Aprueba las ampliaciones del sistema de transporte.
+  </div>
+  <div class="alert">
+    <strong>Distinción clave:</strong> la Secretaría de Energía define la política del sector. El ENRE fiscaliza, dicta reglamentos técnicos y fija las <strong>bases de cálculo</strong> tarifario — no las tarifas finales directamente.
+  </div>
+  <div class="nav-footer">
+    <button class="nav-btn" onclick="showStep(6)">← Anterior</button>
+    <button class="nav-btn" disabled>Fin del recorrido ✓</button>
+  </div>
+</section>
+
+</main>
+
+<!-- ── ASIDE PANEL DERECHO ── -->
+<aside class="aside-outer">
+<div class="aside-panel" id="aside-panel">
+
+  <!-- Fórmula clave -->
+  <div class="aside-block">
+    <p class="aside-block-title">Fórmula clave</p>
+    <div class="aside-formula">P = I² &times; R</div>
+    <p class="aside-formula-sub">Pérdidas de energía (Joule). Al duplicar la tensión, la corriente se reduce a la mitad y las pérdidas caen al 25%.</p>
+  </div>
+
+  <!-- Glosario -->
+  <div class="aside-block">
+    <p class="aside-block-title">Glosario rápido</p>
+    <div class="aside-concept">
+      <strong>SADI</strong>Sistema Argentino de Interconexión — la red nacional de transmisión.
+    </div>
+    <div class="aside-concept">
+      <strong>ACSR</strong>Cable de aluminio con alma de acero. El más usado en alta tensión aérea.
+    </div>
+    <div class="aside-concept">
+      <strong>CAMMESA</strong>Administra el despacho técnico y económico del mercado mayorista.
+    </div>
+    <div class="aside-concept">
+      <strong>ENRE</strong>Regula y fiscaliza el sector eléctrico. Fija bases de cálculo tarifario.
+    </div>
+    <div class="aside-concept">
+      <strong>Hilo de guardia</strong>Cable de acero en la punta de la torre. Conectado a tierra — protege contra rayos.
+    </div>
+    <div class="aside-concept">
+      <strong>Aislador</strong>Pieza de porcelana, vidrio templado o polímero. Impide la descarga eléctrica por la estructura.
+    </div>
+    <div class="aside-concept">
+      <strong>Cable desnudo</strong>Los conductores de A.T. no tienen cobertura aislante. La aislación la dan los aisladores.
+    </div>
+    <div class="aside-concept">
+      <strong>Vano</strong>Distancia entre dos estructuras consecutivas (300–500 m en líneas de 500 kV).
+    </div>
+  </div>
+
+  <!-- ¿Sabías que? -->
+  <div class="aside-block">
+    <p class="aside-block-title">¿Sabías que…?</p>
+    <div class="aside-sabias">Argentina tiene más de 14.000 km de líneas de alta tensión en el SADI.</div>
+    <div class="aside-sabias">La Central Yacyretá genera más energía que todas las centrales nucleares del país juntas.</div>
+    <div class="aside-sabias">El aluminio pesa un tercio que el cobre, por eso se prefiere para líneas aéreas largas.</div>
+    <div class="aside-sabias">En 500 kV, una cadena de aisladores puede tener hasta 30 discos individuales.</div>
+    <div class="aside-sabias">Tierra del Fuego no está conectada al SADI — tiene su propio sistema aislado.</div>
+  </div>
+
+  <!-- Recursos -->
+  <div class="aside-block">
+    <p class="aside-block-title">Sistema eléctrico</p>
+    <a href="https://energiasdemipais.educ.ar/sistema-energetico/" target="_blank" class="aside-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>Energías de mi País — Sistema Energético</a>
+    <a href="https://cammesaweb.cammesa.com/" target="_blank" class="aside-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>Sitio oficial CAMMESA</a>
+    <a href="https://cammesaweb.cammesa.com/geosadi/" target="_blank" class="aside-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>Mapa GeoSADI — CAMMESA</a>
+    <a href="https://www.enre.gov.ar/" target="_blank" class="aside-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>Sitio oficial ENRE</a>
+  </div>
+
+  <div class="aside-block">
+    <p class="aside-block-title">Aisladores eléctricos</p>
+    <a href="https://www.youtube.com/watch?v=f_LsKUKbveY" target="_blank" class="aside-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>Video — Aisladores eléctricos</a>
+    <a href="https://blog.structuralia.com/aisladores-en-lineas-electricas-materiales-tipos-y-caracteristicas-principales" target="_blank" class="aside-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>Artículo — Structuralia</a>
+    <a href="https://zmscable.es/que-es-aislador-electrico/" target="_blank" class="aside-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>Artículo — ZMS Cable</a>
+  </div>
+
+  <div class="aside-block">
+    <p class="aside-block-title">Fase, neutro y tensión</p>
+    <a href="https://www.youtube.com/watch?v=S5c2DtCXp2A" target="_blank" class="aside-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>Video — Fase y neutro vs positivo y negativo (1)</a>
+    <a href="https://www.youtube.com/watch?v=GKCTNz4F_iI" target="_blank" class="aside-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>Video — Fase y neutro vs positivo y negativo (2)</a>
+    <a href="https://www.youtube.com/watch?v=KBuAUou-wsE" target="_blank" class="aside-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>Video — Tensión, corriente y potencia</a>
+  </div>
+
+  <div class="aside-block">
+    <p class="aside-block-title">Torres y estructuras</p>
+    <a href="https://drive.google.com/file/d/1xdJzMssXaF-a0GoKTji0yR96l1slENR7/view?usp=sharing" target="_blank" class="aside-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>PDF — Líneas aéreas M.T. y A.T. (UTN · Ing. Cendra)</a>
+    <a href="https://www.poliposte.com.ar/listar.php?s=estructuras-metalicas-para-energia-electrica&amp;c=26739" target="_blank" class="aside-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>Poliposte — Estructuras metálicas</a>
+  </div>
+
+</div>
+</aside>
+
+</div>
+
+<!-- ── FOOTER ── -->
+<footer style="background:#1a1815;color:#9a9590;border-top:1px solid #2e2b28;padding:2.5rem 2rem;margin-top:0;">
+  <div style="max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:2rem;">
+    <div style="flex:1;min-width:220px;">
+      <p style="font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5a5652;font-weight:700;margin-bottom:0.4rem;">Material educativo</p>
+      <p style="font-size:16px;color:#e8e6e0;font-weight:600;margin-bottom:0.2rem;">Instalación, Mantenimiento y Reparación de Sistemas Computacionales</p>
+      <p style="font-size:13px;color:#6a6660;margin-bottom:0;">Unidad 01 — Infraestructura &nbsp;&middot;&nbsp; 7&deg; año Informática &nbsp;&middot;&nbsp; 2026</p>
+    </div>
+    <div style="flex:1;min-width:180px;">
+      <p style="font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5a5652;font-weight:700;margin-bottom:0.4rem;">Institución</p>
+      <p style="font-size:14px;color:#c8c4be;margin-bottom:0.2rem;">Instituto Leonardo Murialdo</p>
+      <p style="font-size:13px;color:#6a6660;">Técnico en Informática Personal y Profesional</p>
+    </div>
+    <div style="flex:1;min-width:180px;">
+      <p style="font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5a5652;font-weight:700;margin-bottom:0.4rem;">Docente</p>
+      <p style="font-size:14px;color:#c8c4be;font-weight:600;margin-bottom:0.4rem;">Prof. Pedaci, Lourdes</p>
+      <a href="https://www.linkedin.com/in/lourdes-pedaci" target="_blank" rel="noopener" style="font-size:12px;color:#4a9fd4;text-decoration:none;display:inline-flex;align-items:center;gap:5px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+    </div>
+  </div>
+  <div style="max-width:1100px;margin:1.75rem auto 0;border-top:1px solid #2e2b28;padding-top:1.25rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;">
+    <p style="font-size:12px;color:#4a4642;">Material didáctico &middot; Uso educativo &middot; Instituto Leonardo Murialdo &middot; 2026</p>
+    <p style="font-size:12px;color:#4a4642;">Fuentes: CAMMESA &middot; Secretaría de Energía &middot; UTN Reconquista (Ing. Cendra)</p>
+  </div>
+</footer>
+
+
+<script>
+let current = 0;
+const total = 8;
+function showStep(i) {
+  if (i < 0 || i >= total) return;
+  document.getElementById('panel-' + current).classList.remove('visible');
+  document.querySelectorAll('.nav-item')[current].classList.remove('active');
+
+  current = i;
+  document.getElementById('panel-' + current).classList.add('visible');
+  document.querySelectorAll('.nav-item')[current].classList.add('active');
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function toggleDD(id) { document.getElementById(id).classList.toggle('open'); }
+</script>
+
+<!-- ── MODAL ZOOM ── -->
+<div class="zoom-overlay" id="zoom-overlay" onclick="closeZoom()">
+  <button class="zoom-close" onclick="closeZoom()" aria-label="Cerrar zoom">×</button>
+  <img id="zoom-img" src="" alt="">
+</div>
+
+<script>
+
+function openZoom(el) {
+  const overlay = document.getElementById('zoom-overlay');
+  const zImg = document.getElementById('zoom-img');
+  zImg.src = el.src;
+  zImg.alt = el.alt;
+  overlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeZoom() {
+  document.getElementById('zoom-overlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeZoom();
+});
+
+</script>
+</body>
+</html>
