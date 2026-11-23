@@ -198,7 +198,9 @@ Objetivo: **WCAG 2.2 nivel AA**.
 
 ```
 .
-├── index.html                      Sitio completo (estructura, estilos y lógica)
+├── index.html                      Estructura y contenido de los 8 módulos, mapa, glosario
+├── css/styles.css                  Estilos: tokens M3 (claro y oscuro), componentes, responsive
+├── js/app.js                       Lógica: router, progreso, mapa, filtros, glosario, tema, zoom
 ├── assets/pictures/                Imágenes de los módulos (diagramas MEM, fotos, figuras UTN)
 ├── design-system/
 │   └── sistema-electrico/MASTER.md Design system: tokens, componentes, reglas, checklist
@@ -211,15 +213,16 @@ Objetivo: **WCAG 2.2 nivel AA**.
 
 ## 7. Cómo editar contenido
 
-Todo está en `index.html`.
+| Quiero… | Archivo | Dónde |
+|---|---|---|
+| Cambiar el texto de un módulo | `index.html` | `<section class="step-panel" id="panel-N">` |
+| Cambiar título, descripción, etapa o filtros de un módulo en el mapa y las tarjetas | `js/app.js` | Arreglo `STEPS` al inicio |
+| Agregar un término al glosario | `index.html` | `<aside class="sheet">`, bloque "Glosario rápido" |
+| Agregar un recurso externo | `index.html` | `<aside class="sheet">`, usar `.aside-link` con `target="_blank" rel="noopener"` |
+| Cambiar un color o un espaciado | `css/styles.css` | Tokens en `:root` (y su par en los dos bloques de modo oscuro) |
+| Cambiar un componente | `css/styles.css` | Cada bloque está titulado con un comentario (`APP SHELL`, `VIEW: MAPA`, `VIEW: MÓDULO`, etc.) |
 
-| Quiero… | Dónde |
-|---|---|
-| Cambiar el texto de un módulo | `<section class="step-panel" id="panel-N">` |
-| Cambiar título, descripción, etapa o filtros de un módulo en el mapa y las tarjetas | Arreglo `STEPS` en el `<script>` final |
-| Agregar un término al glosario | `<aside class="sheet">`, bloque "Glosario rápido" |
-| Agregar un recurso externo | `<aside class="sheet">`, usar `.aside-link` con `target="_blank" rel="noopener"` |
-| Cambiar un color o un espaciado | Tokens en `:root` (y su par en los bloques de modo oscuro) |
+> El pequeño script del `<head>` de `index.html` aplica el tema guardado antes del primer pintado. Queda en línea a propósito para evitar un destello de color al cargar.
 
 ### Componentes de contenido disponibles
 
@@ -252,7 +255,7 @@ Checklist completo en la sección 9 de [`MASTER.md`](design-system/sistema-elect
 
 ## 9. Publicación
 
-Es un sitio estático: alcanza con subir `index.html` y `assets/` a cualquier hosting (GitHub Pages, Netlify, Google Sites con incrustación, el servidor de la escuela). No hace falta compilar. Las fuentes e íconos se cargan desde Google Fonts.
+Es un sitio estático: alcanza con subir `index.html`, `css/`, `js/` y `assets/` a cualquier hosting (GitHub Pages, Netlify, Google Sites con incrustación, el servidor de la escuela). No hace falta compilar. Las fuentes e íconos se cargan desde Google Fonts.
 
 ---
 

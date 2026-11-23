@@ -1,7 +1,7 @@
 # Design System · Sistema Eléctrico Argentino
 
 Fuente de verdad del diseño del sitio (Unidad 01, IMRSC). Basado en **Material 3 Expressive**.
-Los valores viven como variables CSS en `:root` dentro de `index.html`. Ningún componente usa hex sueltos: siempre tokens.
+Los valores viven como variables CSS en `:root` dentro de `css/styles.css`. Ningún componente usa hex sueltos: siempre tokens.
 
 ## 1. Principios
 
@@ -59,6 +59,7 @@ El mismo color se repite en mapa, menú, tarjetas, mini-recorrido y cabecera del
 - **Google Sans Flex** para todo. **Roboto Mono** para valores técnicos (kV, fórmulas, códigos de estructura).
 - Base 16px, cuerpo de módulo 16.5px / 1.75. Mínimo absoluto 11px (solo rótulos en mayúscula con tracking).
 - Títulos de módulo: `clamp(1.6rem, 3.2vw, 2.4rem)`, peso 400 con `<strong>` en 750.
+- Bloques de dos líneas (título + subtítulo, como la barra superior o la marca): flex en columna con `--sp-1` de separación (2px en mobile) y alto de línea fijo (24/18px en la barra, 20/16px en la marca). Tracking neutro o positivo (`.005em` en el título, `.02em` en el subtítulo) y `word-spacing` levemente abierto en textos chicos. Nunca tracking negativo en textos menores a 24px.
 
 ## 4. Espaciado
 
@@ -107,6 +108,10 @@ Shape M3: `xs 4 · sm 8 · md 12 · lg 16 · lg-inc 20 · xl 28 · full`. Botone
 - Geometría fija: `--node-top: 42px`, `--line-y` = centro del ícono. La etiqueta del cable va **sobre la línea** y el cable crece al ancho de la etiqueta (`flex: 1 0 auto`), así nunca desborda ni se superpone.
 - Estados del nodo: `.is-visited` (check `success`), `.is-next` (anillo pulsante + "Seguí acá").
 
+### Tooltip (`.tooltip`)
+
+Plain tooltip M3 para **todo botón que sea solo ícono** (`.icon-btn`, `.zoom-close`, círculos del mini-recorrido) o cualquier elemento con `data-tooltip`. Texto: `data-tooltip` o, si falta, el `aria-label`. Fondo `inverse-surface`, 12px, forma `xs`. Aparece tras 400ms con mouse, inmediato con teclado (`:focus-visible`), nunca en táctil. Se ubica abajo y pasa arriba si no entra. Se oculta con Esc, scroll o clic. No usar el atributo `title` nativo (duplica la leyenda).
+
 ### Otros
 
 `.hero` (siempre oscuro), `.mcard` (grilla de módulos), `.chip` (filtros), `.trail` (mini-recorrido sticky, los círculos se aplican solo a `li a`), `.mod-head`, `.hbox` (callout con ícono por variante), `.alert` (warning), `.table-wrap` (scroll horizontal interno), `.zoomable` + `<dialog>`, `.deepdive` (acordeón con `aria-expanded`), `.sheet` (glosario: superpuesto, o fijo desde 1480px), `.progress-card` (azul tonal + reinicio outlined error).
@@ -134,3 +139,4 @@ Correr la auditoría en 375, 768, 1024 y 1440px, claro y oscuro, recorriendo map
 - [ ] Contraste ≥ 4.5:1 (≥ 3:1 en texto grande).
 - [ ] Objetivos táctiles ≥ 30px (≥ 40px en botones).
 - [ ] Hover visible en todo elemento interactivo.
+- [ ] Todo botón solo ícono muestra su tooltip con mouse y con teclado.
