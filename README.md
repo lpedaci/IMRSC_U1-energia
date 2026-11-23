@@ -1,5 +1,29 @@
 # Sistema Eléctrico Argentino · Guion didáctico interactivo
 
+**Lenguajes y entorno**
+
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS](https://img.shields.io/badge/CSS-663399?style=for-the-badge&logo=css&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![SVG](https://img.shields.io/badge/SVG-FFB13B?style=for-the-badge&logo=svg&logoColor=black)
+![Node.js](https://img.shields.io/badge/Node.js-5FA04E?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
+![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)
+
+**Sistemas de diseño**
+
+![Material 3 Expressive](https://img.shields.io/badge/Material_3-Expressive-1F55C7?style=for-the-badge&logo=materialdesign&logoColor=white)
+![Material Symbols](https://img.shields.io/badge/Material_Symbols-Rounded-535E78?style=for-the-badge&logo=google&logoColor=white)
+![Google Fonts](https://img.shields.io/badge/Google_Fonts-Sans_Flex-4285F4?style=for-the-badge&logo=googlefonts&logoColor=white)
+![Design tokens](https://img.shields.io/badge/Design-Tokens-006874?style=for-the-badge&logo=stylelint&logoColor=white)
+
+**Metodologías**
+
+![WCAG 2.2 AA](https://img.shields.io/badge/WCAG_2.2-AA-005A9C?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiPjxjaXJjbGUgY3g9IjEyIiBjeT0iNCIgcj0iMi4yIi8+PHBhdGggZD0iTTQgNy41YzIuNi44IDUuMyAxLjIgOCAxLjJzNS40LS40IDgtMS4ybC41IDEuOWMtMiAuNi00IDEtNiAxLjJWMTRsMi42IDcuMy0xLjkuN0wxMi44IDE2aC0xLjZMOC44IDIybC0xLjktLjdMOS41IDE0di0zLjRjLTItLjItNC0uNi02LTEuMnoiLz48L3N2Zz4=)
+![Mobile first](https://img.shields.io/badge/Responsive-Mobile_first-2E7D32?style=for-the-badge&logo=googlechrome&logoColor=white)
+![UX/UI](https://img.shields.io/badge/UX%2FUI-Diseño_centrado_en_el_usuario-6A3FB5?style=for-the-badge&logo=figma&logoColor=white)
+![Diseño instruccional](https://img.shields.io/badge/Diseño_instruccional-Organizador_previo-8A5300?style=for-the-badge&logo=bookstack&logoColor=white)
+
 Recorrido web por el sistema eléctrico argentino, de la central generadora al consumidor final. Material de la **Unidad 01 de IMRSC** (Instalación, Mantenimiento y Reparación de Sistemas Computacionales), 7° año Informática, Instituto Leonardo Murialdo.
 
 El sitio convierte el diagrama **MEM 01** en la puerta de entrada al contenido: cada etapa del diagrama es un módulo, y el estudiante recorre la energía en el mismo orden en que viaja por la red.
